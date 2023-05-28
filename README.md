@@ -1,11 +1,11 @@
-# This is my package laravel-collection-extended
+# Laravel Collection Extended
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/pktharindu/laravel-collection-extended.svg?style=flat-square)](https://packagist.org/packages/pktharindu/laravel-collection-extended)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/pktharindu/laravel-collection-extended/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/pktharindu/laravel-collection-extended/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/pktharindu/laravel-collection-extended/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/pktharindu/laravel-collection-extended/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/pktharindu/laravel-collection-extended.svg?style=flat-square)](https://packagist.org/packages/pktharindu/laravel-collection-extended)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+A set of useful Laravel collection macros
 
 ## Installation
 

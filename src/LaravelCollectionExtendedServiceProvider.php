@@ -2,21 +2,27 @@
 
 namespace Pktharindu\LaravelCollectionExtended;
 
-use Pktharindu\LaravelCollectionExtended\Commands\LaravelCollectionExtendedCommand;
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Illuminate\Support\Collection;
+use Illuminate\Support\ServiceProvider;
+use Pktharindu\LaravelCollectionExtended\Macros\FilterMap;
+use Pktharindu\LaravelCollectionExtended\Macros\GetNth;
+use Pktharindu\LaravelCollectionExtended\Macros\Transpose;
 
-class LaravelCollectionExtendedServiceProvider extends PackageServiceProvider
+class LaravelCollectionExtendedServiceProvider extends ServiceProvider
 {
-    public function configurePackage(Package $package): void
+    public function register(): void
     {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
-        $package
-            ->name('laravel-collection-extended')
-            ->hasCommand(LaravelCollectionExtendedCommand::class);
+        Collection::make($this->macros())
+            ->reject(fn ($class, $macro) => Collection::hasMacro($macro))
+            ->each(fn ($class, $macro) => Collection::macro($macro, resolve($class)()));
+    }
+
+    private function macros(): array
+    {
+        return [
+            'getNth' => GetNth::class,
+            'filterMap' => FilterMap::class,
+            'transpose' => Transpose::class,
+        ];
     }
 }

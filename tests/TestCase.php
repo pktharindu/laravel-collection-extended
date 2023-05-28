@@ -2,35 +2,28 @@
 
 namespace Pktharindu\LaravelCollectionExtended\Tests;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
+use PHPUnit\Framework\TestCase as BaseTestCase;
 use Pktharindu\LaravelCollectionExtended\LaravelCollectionExtendedServiceProvider;
+use ReflectionClass;
+use ReflectionException;
 
-class TestCase extends Orchestra
+abstract class TestCase extends BaseTestCase
 {
+    /**
+     * @throws ReflectionException
+     */
     protected function setUp(): void
     {
-        parent::setUp();
-
-        Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Pktharindu\\LaravelCollectionExtended\\Database\\Factories\\'.class_basename($modelName).'Factory'
-        );
+        $this->createDummyProvider()->register();
     }
 
-    protected function getPackageProviders($app)
+    /**
+     * @throws ReflectionException
+     */
+    protected function createDummyProvider(): LaravelCollectionExtendedServiceProvider
     {
-        return [
-            LaravelCollectionExtendedServiceProvider::class,
-        ];
-    }
+        $reflectionClass = new ReflectionClass(LaravelCollectionExtendedServiceProvider::class);
 
-    public function getEnvironmentSetUp($app)
-    {
-        config()->set('database.default', 'testing');
-
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_laravel-collection-extended_table.php.stub';
-        $migration->up();
-        */
+        return $reflectionClass->newInstanceWithoutConstructor();
     }
 }
